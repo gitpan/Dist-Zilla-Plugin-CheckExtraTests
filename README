@@ -1,0 +1,28 @@
+NAME
+    Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
+
+VERSION
+    version 0.001
+
+SYNOPSIS
+    In your dist.ini:
+
+       [CheckExtraTests]
+
+DESCRIPTION
+    Runs all xt tests before release. Dies if any fail. Sets
+    RELEASE_TESTING, but not AUTHOR_TESTING.
+
+SEE ALSO
+    *   Dist::Zilla
+
+AUTHOR
+      David Golden <dagolden@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is Copyright (c) 2010 by David Golden.
+
+    This is free software, licensed under:
+
+      The Apache License, Version 2.0, January 2004
+
