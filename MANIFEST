@@ -13,10 +13,12 @@ t/check-fail.t
 t/check-fail/Changes
 t/check-fail/dist.ini
 t/check-fail/foobar
+t/check-fail/lib/Foo.pm
 t/check-pass.t
 t/check-pass/Changes
 t/check-pass/dist.ini
 t/check-pass/foobar
+t/check-pass/lib/Foo.pm
 weaver.ini
 xt/release/meta-yaml.t
 xt/release/pod-coverage.t

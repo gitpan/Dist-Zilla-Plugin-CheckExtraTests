@@ -19,10 +19,10 @@ no_index:
 provides:
   Dist::Zilla::App::Command::xtest:
     file: lib/Dist/Zilla/App/Command/xtest.pm
-    version: 0.001
+    version: 0.002
   Dist::Zilla::Plugin::CheckExtraTests:
     file: lib/Dist/Zilla/Plugin/CheckExtraTests.pm
-    version: 0.001
+    version: 0.002
 requires:
   App::Prove: 3.00
   Capture::Tiny: 0
@@ -40,4 +40,4 @@ requires:
   namespace::autoclean: 0.09
 resources:
   repository: http://github.com/dagolden/dist-zilla-plugin-checkextratests
-version: 0.001
+version: 0.002

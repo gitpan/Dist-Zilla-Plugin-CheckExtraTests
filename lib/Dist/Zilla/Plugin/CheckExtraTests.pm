@@ -10,7 +10,7 @@
 use strict;
 use warnings;
 package Dist::Zilla::Plugin::CheckExtraTests;
-our $VERSION = '0.001';
+our $VERSION = '0.002';
 # ABSTRACT: check xt tests before release
 
 # Dependencies
@@ -28,13 +28,15 @@ with 'Dist::Zilla::Role::BeforeRelease';
 sub before_release {
   my $self = shift;
 
+  $self->zilla->ensure_built_in;
+
   # chdir in
-  local $File::chdir::CWD = $self->zilla->ensure_built_in;
- 
+  local $File::chdir::CWD = $self->zilla->built_in; 
+
   # prove xt
   local $ENV{RELEASE_TESTING} = 1;
   my $app = App::Prove->new;
-  $app->process_args(qw/-r -l -q xt/);
+  $app->process_args(qw/-r -l xt/);
   $app->run or $self->log_fatal("Fatal errors in xt tests");
   return;
 }
@@ -53,7 +55,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.001
+version 0.002
 
 =head1 SYNOPSIS
 
