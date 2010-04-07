@@ -10,7 +10,9 @@
 use strict;
 use warnings;
 package Dist::Zilla::App::Command::xtest;
-our $VERSION = '0.002';
+BEGIN {
+  $Dist::Zilla::App::Command::xtest::VERSION = '0.003';
+}
 # ABSTRACT: run xt tests for your dist
 use Dist::Zilla::App -command;
 
@@ -23,7 +25,7 @@ sub execute {
   my ($self, $opt, $arg) = @_;
 
   require App::Prove;
-  require File::chdir;
+  require File::pushd;
   require File::Temp;
   require Path::Class;
 
@@ -38,7 +40,7 @@ sub execute {
 
   $self->zilla->ensure_built_in($target);
 
-  local $File::chdir::CWD = $target;
+  my $wd = File::pushd::pushd( $target );
 
   my $error;
 
@@ -68,7 +70,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 

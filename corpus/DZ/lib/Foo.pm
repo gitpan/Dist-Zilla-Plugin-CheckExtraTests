@@ -8,7 +8,6 @@
 #   The Apache License, Version 2.0, January 2004
 # 
 package Foo;
-our $VERSION = '0.002';
 use strict;
 use warnings;
 # ABSTRACT: Foo this thing
