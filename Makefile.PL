@@ -18,30 +18,28 @@ my %WriteMakefileArgs = (
                                                  'ExtUtils::MakeMaker' => '6.31'
                                                },
                        'AUTHOR' => 'David Golden <dagolden@cpan.org>',
-                       'BUILD_REQUIRES' => {
-                                             'Try::Tiny' => '0',
-                                             'Test::More' => '0.88',
-                                             'Capture::Tiny' => '0',
-                                             'Params::Util' => '0',
-                                             'File::Find' => '0',
-                                             'Sub::Exporter' => '0',
-                                             'Dist::Zilla::Tester' => '0',
-                                             'Dist::Zilla::App::Tester' => '0'
-                                           },
+                       'BUILD_REQUIRES' => {},
                        'ABSTRACT' => 'check xt tests before release',
                        'EXE_FILES' => [],
-                       'VERSION' => '0.003',
+                       'VERSION' => '0.004',
                        'PREREQ_PM' => {
-                                        'Dist::Zilla::App' => '0',
-                                        'namespace::autoclean' => '0.09',
-                                        'File::pushd' => '0',
+                                        'Capture::Tiny' => '0',
+                                        'Sub::Exporter' => '0',
+                                        'Dist::Zilla::Tester' => '2',
+                                        'Params::Util' => '1',
+                                        'Moose' => '0',
+                                        'Try::Tiny' => '0',
+                                        'namespace::autoclean' => '0',
+                                        'Dist::Zilla::App' => '2',
+                                        'File::pushd' => '1',
+                                        'Dist::Zilla::App::Tester' => '2',
                                         'Moose::Autobox' => '0',
-                                        'File::Temp' => '0',
-                                        'Dist::Zilla' => '2.100950',
-                                        'Dist::Zilla::Role::BeforeRelease' => '0',
+                                        'Test::More' => '0.88',
+                                        'Dist::Zilla' => '2',
+                                        'File::Temp' => '0.20',
+                                        'Dist::Zilla::Role::BeforeRelease' => '2',
                                         'Path::Class' => '0',
-                                        'App::Prove' => '3.00',
-                                        'Moose' => '0.99'
+                                        'App::Prove' => '3'
                                       },
                        'LICENSE' => 'apache'
                      );

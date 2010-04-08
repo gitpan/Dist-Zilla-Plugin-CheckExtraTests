@@ -11,7 +11,7 @@ use strict;
 use warnings;
 package Dist::Zilla::App::Command::xtest;
 BEGIN {
-  $Dist::Zilla::App::Command::xtest::VERSION = '0.003';
+  $Dist::Zilla::App::Command::xtest::VERSION = '0.004';
 }
 # ABSTRACT: run xt tests for your dist
 use Dist::Zilla::App -command;
@@ -70,7 +70,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 

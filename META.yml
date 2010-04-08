@@ -2,15 +2,7 @@
 abstract: 'check xt tests before release'
 author:
   - 'David Golden <dagolden@cpan.org>'
-build_requires:
-  Capture::Tiny: 0
-  Dist::Zilla::App::Tester: 0
-  Dist::Zilla::Tester: 0
-  File::Find: 0
-  Params::Util: 0
-  Sub::Exporter: 0
-  Test::More: 0.88
-  Try::Tiny: 0
+build_requires: {}
 configure_requires:
   ExtUtils::MakeMaker: 6.31
 generated_by: 'Dist::Zilla version 2.100960'
@@ -28,22 +20,29 @@ no_index:
 provides:
   Dist::Zilla::App::Command::xtest:
     file: lib/Dist/Zilla/App/Command/xtest.pm
-    version: 0.003
+    version: 0.004
   Dist::Zilla::Plugin::CheckExtraTests:
     file: lib/Dist/Zilla/Plugin/CheckExtraTests.pm
-    version: 0.003
+    version: 0.004
 recommends: {}
 requires:
-  App::Prove: 3.00
-  Dist::Zilla: 2.100950
-  Dist::Zilla::App: 0
-  Dist::Zilla::Role::BeforeRelease: 0
-  File::Temp: 0
-  File::pushd: 0
-  Moose: 0.99
+  App::Prove: 3
+  Capture::Tiny: 0
+  Dist::Zilla: 2
+  Dist::Zilla::App: 2
+  Dist::Zilla::App::Tester: 2
+  Dist::Zilla::Role::BeforeRelease: 2
+  Dist::Zilla::Tester: 2
+  File::Temp: 0.20
+  File::pushd: 1
+  Moose: 0
   Moose::Autobox: 0
+  Params::Util: 1
   Path::Class: 0
-  namespace::autoclean: 0.09
+  Sub::Exporter: 0
+  Test::More: 0.88
+  Try::Tiny: 0
+  namespace::autoclean: 0
 resources:
   repository: http://github.com/dagolden/dist-zilla-plugin-checkextratests
-version: 0.003
+version: 0.004

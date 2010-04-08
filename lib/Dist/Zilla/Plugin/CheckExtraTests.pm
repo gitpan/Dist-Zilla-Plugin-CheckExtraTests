@@ -11,7 +11,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::CheckExtraTests;
 BEGIN {
-  $Dist::Zilla::Plugin::CheckExtraTests::VERSION = '0.003';
+  $Dist::Zilla::Plugin::CheckExtraTests::VERSION = '0.004';
 }
 # ABSTRACT: check xt tests before release
 
@@ -58,7 +58,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
 
