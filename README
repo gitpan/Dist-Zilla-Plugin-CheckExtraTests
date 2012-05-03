@@ -2,7 +2,7 @@ NAME
     Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 VERSION
-    version 0.004
+    version 0.005
 
 SYNOPSIS
     In your dist.ini:
@@ -16,11 +16,26 @@ DESCRIPTION
 SEE ALSO
     *   Dist::Zilla
 
+SUPPORT
+  Bugs / Feature Requests
+    Please report any bugs or feature requests through the issue tracker at
+    <http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-Chec
+    kExtraTests>. You will be notified automatically of any progress on your
+    issue.
+
+  Source Code
+    This is open source software. The code repository is available for
+    public review and contribution under the terms of the license.
+
+    <https://github.com/dagolden/dist-zilla-plugin-checkextratests>
+
+      git clone https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
+
 AUTHOR
-      David Golden <dagolden@cpan.org>
+    David Golden <dagolden@cpan.org>
 
 COPYRIGHT AND LICENSE
-    This software is Copyright (c) 2010 by David Golden.
+    This software is Copyright (c) 2012 by David Golden.
 
     This is free software, licensed under:
 

@@ -1,19 +1,8 @@
-# 
-# This file is part of Dist-Zilla-Plugin-CheckExtraTests
-# 
-# This software is Copyright (c) 2010 by David Golden.
-# 
-# This is free software, licensed under:
-# 
-#   The Apache License, Version 2.0, January 2004
-# 
 use strict;
 use warnings;
 package Dist::Zilla::Plugin::CheckExtraTests;
-BEGIN {
-  $Dist::Zilla::Plugin::CheckExtraTests::VERSION = '0.004';
-}
 # ABSTRACT: check xt tests before release
+our $VERSION = '0.005'; # VERSION
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date
@@ -58,7 +47,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.004
+version 0.005
 
 =head1 SYNOPSIS
 
@@ -83,13 +72,32 @@ L<Dist::Zilla>
 
 =back
 
+=for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders metacpan
+
+=head1 SUPPORT
+
+=head2 Bugs / Feature Requests
+
+Please report any bugs or feature requests through the issue tracker
+at L<http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-CheckExtraTests>.
+You will be notified automatically of any progress on your issue.
+
+=head2 Source Code
+
+This is open source software.  The code repository is available for
+public review and contribution under the terms of the license.
+
+L<https://github.com/dagolden/dist-zilla-plugin-checkextratests>
+
+  git clone https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
+
 =head1 AUTHOR
 
-  David Golden <dagolden@cpan.org>
+David Golden <dagolden@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2010 by David Golden.
+This software is Copyright (c) 2012 by David Golden.
 
 This is free software, licensed under:
 

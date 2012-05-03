@@ -1,25 +1,20 @@
-# 
-# This file is part of Dist-Zilla-Plugin-CheckExtraTests
-# 
-# This software is Copyright (c) 2010 by David Golden.
-# 
-# This is free software, licensed under:
-# 
-#   The Apache License, Version 2.0, January 2004
-# 
 use strict;
 use warnings;
 package Dist::Zilla::App::Command::xtest;
-BEGIN {
-  $Dist::Zilla::App::Command::xtest::VERSION = '0.004';
-}
 # ABSTRACT: run xt tests for your dist
+our $VERSION = '0.005'; # VERSION
 use Dist::Zilla::App -command;
 
+use Path::Class::Rule;
 use Moose::Autobox;
 
 
 sub abstract { 'test your dist' }
+
+sub command_names {
+  my ($self) = @_;
+  return ( $self->SUPER::command_names, 'xt' );
+}
 
 sub execute {
   my ($self, $opt, $arg) = @_;
@@ -45,8 +40,21 @@ sub execute {
   my $error;
 
   my $app = App::Prove->new;
-  $app->process_args(qw/-r -l xt/);
-  $error = "Failed xt tests" unless  $app->run;
+  if ( ref $arg eq 'ARRAY' && @$arg ) {
+    my $pcr = Path::Class::Rule->new->file->name(@$arg);
+    my @t = map { "$_" } $pcr->all( 'xt' );
+    if ( @t ) {
+      $app->process_args(qw/-r -l/, @t) if @t;
+      $error = "Failed xt tests" unless  $app->run;
+    }
+    else {
+      $self->log("no xt files found matching: @$arg");
+    }
+  }
+  else {
+    $app->process_args(qw/-r -l xt/);
+    $error = "Failed xt tests" unless  $app->run;
+  }
 
   if ($error) {
     $self->log($error);
@@ -70,7 +78,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.004
+version 0.005
 
 =head1 SYNOPSIS
 
@@ -95,13 +103,24 @@ A build that fails tests will be left behind for analysis, and F<dzil> will
 exit a non-zero value.  If the tests are successful, the build directory will
 be removed and F<dzil> will exit with status 0.
 
+You can also use 'xt' as an alias for 'xtest':
+
+  dzil xt
+
+If you provide one or more filenames on the command line, only
+those tests will be run (however deeply they are nested).  Glob
+patterns may also work, if you protect it from your shell.
+
+  dzil xtest pod-spell.t
+  dzil xtest 'dist*'          # don't expand to dist.ini
+
 =head1 AUTHOR
 
-  David Golden <dagolden@cpan.org>
+David Golden <dagolden@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2010 by David Golden.
+This software is Copyright (c) 2012 by David Golden.
 
 This is free software, licensed under:
 
