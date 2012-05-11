@@ -10,7 +10,7 @@ use ExtUtils::MakeMaker 6.30;
 
 my %WriteMakefileArgs = (
   "ABSTRACT" => "check xt tests before release",
-  "AUTHOR" => "David Golden <dagolden\@cpan.org>",
+  "AUTHOR" => "David Golden <dagolden\@cpan.org>, Jesse Luehrs <doy\@cpan.org>",
   "BUILD_REQUIRES" => {
     "Capture::Tiny" => 0,
     "Dist::Zilla::App::Tester" => 0,
@@ -19,6 +19,7 @@ my %WriteMakefileArgs = (
     "Params::Util" => 0,
     "Sub::Exporter" => 0,
     "Test::More" => "0.88",
+    "Test::Requires" => 0,
     "Try::Tiny" => 0
   },
   "CONFIGURE_REQUIRES" => {
@@ -33,6 +34,7 @@ my %WriteMakefileArgs = (
     "Dist::Zilla" => "2.100950",
     "Dist::Zilla::App" => 0,
     "Dist::Zilla::Role::BeforeRelease" => 0,
+    "Dist::Zilla::Role::TestRunner" => 0,
     "File::Temp" => 0,
     "File::pushd" => 0,
     "Moose" => "0.99",
@@ -43,7 +45,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.005",
+  "VERSION" => "0.006",
   "test" => {
     "TESTS" => "t/*.t"
   }

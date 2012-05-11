@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.005'; # VERSION
+our $VERSION = '0.006'; # VERSION
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date
@@ -25,10 +25,15 @@ sub before_release {
   # chdir in
   my $wd = File::pushd::pushd($self->zilla->built_in);
 
+  # make
+  my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
+  die "no BuildRunner plugins specified" unless @builders;
+  $builders[0]->build;
+
   # prove xt
   local $ENV{RELEASE_TESTING} = 1;
   my $app = App::Prove->new;
-  $app->process_args(qw/-r -l xt/);
+  $app->process_args(qw/-r -b xt/);
   $app->run or $self->log_fatal("Fatal errors in xt tests");
   return;
 }
@@ -47,7 +52,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -91,9 +96,19 @@ L<https://github.com/dagolden/dist-zilla-plugin-checkextratests>
 
   git clone https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
 
-=head1 AUTHOR
+=head1 AUTHORS
+
+=over 4
+
+=item *
 
 David Golden <dagolden@cpan.org>
+
+=item *
+
+Jesse Luehrs <doy@cpan.org>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 

@@ -2,7 +2,7 @@ NAME
     Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 VERSION
-    version 0.005
+    version 0.006
 
 SYNOPSIS
     In your dist.ini:
@@ -31,8 +31,10 @@ SUPPORT
 
       git clone https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
 
-AUTHOR
-    David Golden <dagolden@cpan.org>
+AUTHORS
+    *   David Golden <dagolden@cpan.org>
+
+    *   Jesse Luehrs <doy@cpan.org>
 
 COPYRIGHT AND LICENSE
     This software is Copyright (c) 2012 by David Golden.

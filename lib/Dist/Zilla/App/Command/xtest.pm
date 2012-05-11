@@ -2,14 +2,14 @@ use strict;
 use warnings;
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-our $VERSION = '0.005'; # VERSION
+our $VERSION = '0.006'; # VERSION
 use Dist::Zilla::App -command;
 
 use Path::Class::Rule;
 use Moose::Autobox;
 
 
-sub abstract { 'test your dist' }
+sub abstract { 'run xt tests for your dist' }
 
 sub command_names {
   my ($self) = @_;
@@ -37,6 +37,10 @@ sub execute {
 
   my $wd = File::pushd::pushd( $target );
 
+  my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
+  die "no BuildRunner plugins specified" unless @builders;
+  $builders[0]->build;
+
   my $error;
 
   my $app = App::Prove->new;
@@ -44,7 +48,7 @@ sub execute {
     my $pcr = Path::Class::Rule->new->file->name(@$arg);
     my @t = map { "$_" } $pcr->all( 'xt' );
     if ( @t ) {
-      $app->process_args(qw/-r -l/, @t) if @t;
+      $app->process_args(qw/-r -b/, @t) if @t;
       $error = "Failed xt tests" unless  $app->run;
     }
     else {
@@ -52,7 +56,7 @@ sub execute {
     }
   }
   else {
-    $app->process_args(qw/-r -l xt/);
+    $app->process_args(qw/-r -b xt/);
     $error = "Failed xt tests" unless  $app->run;
   }
 
@@ -78,7 +82,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.005
+version 0.006
 
 =head1 SYNOPSIS
 
@@ -114,9 +118,19 @@ patterns may also work, if you protect it from your shell.
   dzil xtest pod-spell.t
   dzil xtest 'dist*'          # don't expand to dist.ini
 
-=head1 AUTHOR
+=head1 AUTHORS
+
+=over 4
+
+=item *
 
 David Golden <dagolden@cpan.org>
+
+=item *
+
+Jesse Luehrs <doy@cpan.org>
+
+=back
 
 =head1 COPYRIGHT AND LICENSE
 
