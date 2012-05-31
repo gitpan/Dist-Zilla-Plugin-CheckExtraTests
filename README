@@ -2,7 +2,7 @@ NAME
     Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 VERSION
-    version 0.006
+    version 0.007
 
 SYNOPSIS
     In your dist.ini:

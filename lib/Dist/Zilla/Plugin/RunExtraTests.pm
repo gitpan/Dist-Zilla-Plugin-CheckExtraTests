@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
-our $VERSION = '0.006'; # VERSION
+our $VERSION = '0.007'; # VERSION
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date
@@ -26,9 +26,12 @@ sub test {
   @dirs = grep { -d } @dirs;
   return unless @dirs;
 
-  my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
-  die "no BuildRunner plugins specified" unless @builders;
-  $builders[0]->build;
+  # If the dist hasn't been built yet, then build it:
+  unless (-d 'blib') {
+    my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
+    die "no BuildRunner plugins specified" unless @builders;
+    $builders[0]->build;
+  }
 
   my $app = App::Prove->new;
   $app->process_args(qw/-r -b/, @dirs);
@@ -50,7 +53,7 @@ Dist::Zilla::Plugin::RunExtraTests - support running xt tests via dzil test
 
 =head1 VERSION
 
-version 0.006
+version 0.007
 
 =head1 SYNOPSIS
 
@@ -64,6 +67,10 @@ Runs xt tests when CE<lt>dzil testE<gt> is run. CE<lt>xtE<sol>releaseE<gt>, CE<l
 CE<lt>xtE<sol>smokeE<gt> will be tested based on the values of the appropriate environment
 variables (CE<lt>RELEASE_TESTINGE<gt>, CE<lt>AUTHOR_TESTINGE<gt>, and CE<lt>AUTOMATED_TESTINGE<gt>),
 which are set by CE<lt>dzil testE<gt>.
+
+If CE<lt>RunExtraTestsE<gt> is listed after one of the normal test-running
+plugins (e.g. CE<lt>MakeMakerE<gt> or CE<lt>ModuleBuildE<gt>), then the dist will not
+be rebuilt between running the normal tests and the extra tests.
 
 =for Pod::Coverage::TrustPod test
 

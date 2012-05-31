@@ -33,13 +33,13 @@ no_index:
 provides:
   Dist::Zilla::App::Command::xtest:
     file: lib/Dist/Zilla/App/Command/xtest.pm
-    version: 0.006
+    version: 0.007
   Dist::Zilla::Plugin::CheckExtraTests:
     file: lib/Dist/Zilla/Plugin/CheckExtraTests.pm
-    version: 0.006
+    version: 0.007
   Dist::Zilla::Plugin::RunExtraTests:
     file: lib/Dist/Zilla/Plugin/RunExtraTests.pm
-    version: 0.006
+    version: 0.007
 requires:
   App::Prove: 3.00
   Dist::Zilla: 2.100950
@@ -60,4 +60,4 @@ resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-CheckExtraTests
   homepage: https://github.com/dagolden/dist-zilla-plugin-checkextratests
   repository: https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
-version: 0.006
+version: 0.007

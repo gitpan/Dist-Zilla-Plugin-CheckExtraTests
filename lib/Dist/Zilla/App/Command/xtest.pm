@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-our $VERSION = '0.006'; # VERSION
+our $VERSION = '0.007'; # VERSION
 use Dist::Zilla::App -command;
 
 use Path::Class::Rule;
@@ -82,7 +82,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.006
+version 0.007
 
 =head1 SYNOPSIS
 
