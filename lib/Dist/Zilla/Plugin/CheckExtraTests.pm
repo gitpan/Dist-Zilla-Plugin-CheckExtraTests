@@ -2,12 +2,10 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.007'; # VERSION
+our $VERSION = '0.008'; # VERSION
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date
-use App::Prove 3.00 ();
-use File::pushd 0 ();
 use Moose 0.99;
 use namespace::autoclean 0.09;
 
@@ -23,12 +21,16 @@ sub before_release {
   $self->zilla->ensure_built_in;
 
   # chdir in
+  require File::pushd;
   my $wd = File::pushd::pushd($self->zilla->built_in);
 
   # make
   my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
   die "no BuildRunner plugins specified" unless @builders;
   $builders[0]->build;
+
+  require App::Prove;
+  App::Prove->VERSION('3.00');
 
   # prove xt
   local $ENV{RELEASE_TESTING} = 1;
@@ -42,7 +44,7 @@ __PACKAGE__->meta->make_immutable;
 
 1;
 
-
+__END__
 
 =pod
 
@@ -52,7 +54,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
@@ -84,7 +86,7 @@ L<Dist::Zilla>
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests through the issue tracker
-at L<http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-CheckExtraTests>.
+at L<https://github.com/dagolden/dist-zilla-plugin-checkextratests/issues>.
 You will be notified automatically of any progress on your issue.
 
 =head2 Source Code
@@ -94,7 +96,7 @@ public review and contribution under the terms of the license.
 
 L<https://github.com/dagolden/dist-zilla-plugin-checkextratests>
 
-  git clone https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
+  git clone git://github.com/dagolden/dist-zilla-plugin-checkextratests.git
 
 =head1 AUTHORS
 
@@ -112,15 +114,10 @@ Jesse Luehrs <doy@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2012 by David Golden.
+This software is Copyright (c) 2013 by David Golden.
 
 This is free software, licensed under:
 
   The Apache License, Version 2.0, January 2004
 
 =cut
-
-
-__END__
-
-

@@ -16,7 +16,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300016, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 4.300029, CPAN::Meta::Converter version 2.120921'
 license: apache
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -33,13 +33,13 @@ no_index:
 provides:
   Dist::Zilla::App::Command::xtest:
     file: lib/Dist/Zilla/App/Command/xtest.pm
-    version: 0.007
+    version: 0.008
   Dist::Zilla::Plugin::CheckExtraTests:
     file: lib/Dist/Zilla/Plugin/CheckExtraTests.pm
-    version: 0.007
+    version: 0.008
   Dist::Zilla::Plugin::RunExtraTests:
     file: lib/Dist/Zilla/Plugin/RunExtraTests.pm
-    version: 0.007
+    version: 0.008
 requires:
   App::Prove: 3.00
   Dist::Zilla: 2.100950
@@ -57,7 +57,7 @@ requires:
   strict: 0
   warnings: 0
 resources:
-  bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-CheckExtraTests
-  homepage: https://github.com/dagolden/dist-zilla-plugin-checkextratests
-  repository: https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
-version: 0.007
+  bugtracker: https://github.com/dagolden/dist-zilla-plugin-checkextratests/issues
+  homepage: https://metacpan.org/release/Dist-Zilla-Plugin-CheckExtraTests
+  repository: git://github.com/dagolden/dist-zilla-plugin-checkextratests.git
+version: 0.008

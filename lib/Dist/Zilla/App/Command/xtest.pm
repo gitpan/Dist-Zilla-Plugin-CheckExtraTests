@@ -2,10 +2,9 @@ use strict;
 use warnings;
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-our $VERSION = '0.007'; # VERSION
+our $VERSION = '0.008'; # VERSION
 use Dist::Zilla::App -command;
 
-use Path::Class::Rule;
 use Moose::Autobox;
 
 
@@ -45,6 +44,7 @@ sub execute {
 
   my $app = App::Prove->new;
   if ( ref $arg eq 'ARRAY' && @$arg ) {
+    require Path::Class::Rule;
     my $pcr = Path::Class::Rule->new->file->name(@$arg);
     my @t = map { "$_" } $pcr->all( 'xt' );
     if ( @t ) {
@@ -74,6 +74,7 @@ sub execute {
 1;
 
 __END__
+
 =pod
 
 =head1 NAME
@@ -82,7 +83,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
@@ -134,11 +135,10 @@ Jesse Luehrs <doy@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2012 by David Golden.
+This software is Copyright (c) 2013 by David Golden.
 
 This is free software, licensed under:
 
   The Apache License, Version 2.0, January 2004
 
 =cut
-

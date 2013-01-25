@@ -1,5 +1,9 @@
 Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
+0.008     2013-01-25 15:23:15 America/New_York
+
+    - lazy loading of some dependencies (DOLMEN)
+
 0.007     2012-05-31 12:00:29 America/New_York
 
     - change RunExtraTests plugin to avoid rebuilding the dist when

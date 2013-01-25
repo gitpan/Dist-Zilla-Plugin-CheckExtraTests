@@ -2,11 +2,10 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
-our $VERSION = '0.007'; # VERSION
+our $VERSION = '0.008'; # VERSION
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date
-use App::Prove 3.00 ();
 use Moose 0.99;
 use namespace::autoclean 0.09;
 
@@ -33,6 +32,9 @@ sub test {
     $builders[0]->build;
   }
 
+  require App::Prove;
+  App::Prove->VERSION('3.00');
+
   my $app = App::Prove->new;
   $app->process_args(qw/-r -b/, @dirs);
   $app->run or $self->log_fatal("Fatal errors in xt tests");
@@ -43,7 +45,7 @@ __PACKAGE__->meta->make_immutable;
 
 1;
 
-
+__END__
 
 =pod
 
@@ -53,7 +55,7 @@ Dist::Zilla::Plugin::RunExtraTests - support running xt tests via dzil test
 
 =head1 VERSION
 
-version 0.007
+version 0.008
 
 =head1 SYNOPSIS
 
@@ -100,15 +102,10 @@ Jesse Luehrs <doy@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2012 by David Golden.
+This software is Copyright (c) 2013 by David Golden.
 
 This is free software, licensed under:
 
   The Apache License, Version 2.0, January 2004
 
 =cut
-
-
-__END__
-
-
