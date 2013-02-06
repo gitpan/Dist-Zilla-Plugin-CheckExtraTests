@@ -39,13 +39,13 @@ my %WriteMakefileArgs = (
     "File::pushd" => 0,
     "Moose" => "0.99",
     "Moose::Autobox" => 0,
-    "Path::Class" => 0,
-    "Path::Class::Rule" => 0,
+    "Path::Iterator::Rule" => 0,
+    "Path::Tiny" => 0,
     "namespace::autoclean" => "0.09",
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.008",
+  "VERSION" => "0.009",
   "test" => {
     "TESTS" => "t/*.t"
   }

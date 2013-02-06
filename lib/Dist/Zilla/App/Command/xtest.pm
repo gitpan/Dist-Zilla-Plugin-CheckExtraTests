@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-our $VERSION = '0.008'; # VERSION
+our $VERSION = '0.009'; # VERSION
 use Dist::Zilla::App -command;
 
 use Moose::Autobox;
@@ -21,12 +21,12 @@ sub execute {
   require App::Prove;
   require File::pushd;
   require File::Temp;
-  require Path::Class;
+  require Path::Tiny;
 
-  my $build_root = Path::Class::dir('.build');
+  my $build_root = Path::Tiny::path('.build');
   $build_root->mkpath unless -d $build_root;
 
-  my $target = Path::Class::dir( File::Temp::tempdir(DIR => $build_root) );
+  my $target = Path::Tiny::path( File::Temp::tempdir(DIR => $build_root) );
   $self->log("building test distribution under $target");
 
   local $ENV{AUTHOR_TESTING} = 1;
@@ -44,8 +44,8 @@ sub execute {
 
   my $app = App::Prove->new;
   if ( ref $arg eq 'ARRAY' && @$arg ) {
-    require Path::Class::Rule;
-    my $pcr = Path::Class::Rule->new->file->name(@$arg);
+    require Path::Iterator::Rule;
+    my $pcr = Path::Iterator::Rule->new->file->name(@$arg);
     my @t = map { "$_" } $pcr->all( 'xt' );
     if ( @t ) {
       $app->process_args(qw/-r -b/, @t) if @t;
@@ -83,7 +83,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.008
+version 0.009
 
 =head1 SYNOPSIS
 
