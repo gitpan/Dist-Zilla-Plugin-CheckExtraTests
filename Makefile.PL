@@ -31,7 +31,7 @@ my %WriteMakefileArgs = (
   "NAME" => "Dist::Zilla::Plugin::CheckExtraTests",
   "PREREQ_PM" => {
     "App::Prove" => "3.00",
-    "Dist::Zilla" => "2.100950",
+    "Dist::Zilla" => "4.3",
     "Dist::Zilla::App" => 0,
     "Dist::Zilla::Role::BeforeRelease" => 0,
     "Dist::Zilla::Role::TestRunner" => 0,
@@ -45,7 +45,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.009",
+  "VERSION" => "0.010",
   "test" => {
     "TESTS" => "t/*.t"
   }
