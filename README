@@ -2,12 +2,12 @@ NAME
     Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 VERSION
-    version 0.010
+    version 0.011
 
 SYNOPSIS
     In your dist.ini:
 
-       [CheckExtraTests]
+      [CheckExtraTests]
 
 DESCRIPTION
     Runs all xt tests before release. Dies if any fail. Sets

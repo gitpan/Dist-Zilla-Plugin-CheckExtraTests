@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
-our $VERSION = '0.010'; # VERSION
+our $VERSION = '0.011'; # VERSION
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date
@@ -55,30 +55,30 @@ Dist::Zilla::Plugin::RunExtraTests - support running xt tests via dzil test
 
 =head1 VERSION
 
-version 0.010
+version 0.011
 
 =head1 SYNOPSIS
 
 In your dist.ini:
 
-   [RunExtraTests]
+  [RunExtraTests]
 
 =head1 DESCRIPTION
 
-Runs xt tests when CE<lt>dzil testE<gt> is run. CE<lt>xtE<sol>releaseE<gt>, CE<lt>xtE<sol>authorE<gt>, and
-CE<lt>xtE<sol>smokeE<gt> will be tested based on the values of the appropriate environment
-variables (CE<lt>RELEASE_TESTINGE<gt>, CE<lt>AUTHOR_TESTINGE<gt>, and CE<lt>AUTOMATED_TESTINGE<gt>),
-which are set by CE<lt>dzil testE<gt>.
+Runs xt tests when the test phase is run (e.g. C<dzil test>, C<dzil release>
+etc).  C<xt/release>, C<xt/author>, and C<xt/smoke> will be tested based on the
+values of the appropriate environment variables (C<RELEASE_TESTING>,
+C<AUTHOR_TESTING>, and C<AUTOMATED_TESTING>), which are set by C<dzil test>.
 
-If CE<lt>RunExtraTestsE<gt> is listed after one of the normal test-running
-plugins (e.g. CE<lt>MakeMakerE<gt> or CE<lt>ModuleBuildE<gt>), then the dist will not
+If C<RunExtraTests> is listed after one of the normal test-running
+plugins (e.g. C<MakeMaker> or C<ModuleBuild>), then the dist will not
 be rebuilt between running the normal tests and the extra tests.
 
 =for Pod::Coverage::TrustPod test
 
 =head1 SEE ALSO
 
-=over
+=over 4
 
 =item *
 

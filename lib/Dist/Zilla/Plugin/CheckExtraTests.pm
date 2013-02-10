@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.010'; # VERSION
+our $VERSION = '0.011'; # VERSION
 
 # Dependencies
 use Dist::Zilla 2.100950 (); # XXX really the next release after this date
@@ -54,13 +54,13 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.010
+version 0.011
 
 =head1 SYNOPSIS
 
 In your dist.ini:
 
-   [CheckExtraTests]
+  [CheckExtraTests]
 
 =head1 DESCRIPTION
 
@@ -71,7 +71,7 @@ but not AUTHOR_TESTING.
 
 =head1 SEE ALSO
 
-=over
+=over 4
 
 =item *
 

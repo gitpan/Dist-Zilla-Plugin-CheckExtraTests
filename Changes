@@ -1,5 +1,11 @@
 Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
+0.011     2013-02-09 20:53:59 America/New_York
+
+    - Doc fixes (ETHER)
+
+    - Path::Tiny fix (ETHER)
+
 0.010     2013-02-07 23:09:15 America/New_York
 
     - Bump Dist::Zilla prereq to something modernish

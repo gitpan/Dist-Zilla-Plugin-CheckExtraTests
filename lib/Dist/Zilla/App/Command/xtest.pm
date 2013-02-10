@@ -2,7 +2,7 @@ use strict;
 use warnings;
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-our $VERSION = '0.010'; # VERSION
+our $VERSION = '0.011'; # VERSION
 use Dist::Zilla::App -command;
 
 use Moose::Autobox;
@@ -66,7 +66,7 @@ sub execute {
     exit 1;
   } else {
     $self->log("all's well; removing $target");
-    $target->rmtree;
+    $target->remove;
   }
 
 }
@@ -83,7 +83,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.010
+version 0.011
 
 =head1 SYNOPSIS
 
@@ -118,6 +118,9 @@ patterns may also work, if you protect it from your shell.
 
   dzil xtest pod-spell.t
   dzil xtest 'dist*'          # don't expand to dist.ini
+
+There is no need to add anything to F<dist.ini> -- installation of this module
+is sufficient to make the command available.
 
 =head1 AUTHORS
 
