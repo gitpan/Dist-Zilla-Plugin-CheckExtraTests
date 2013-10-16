@@ -4,26 +4,16 @@ use warnings;
 
 use 5.006;
 
-use ExtUtils::MakeMaker 6.30;
+use ExtUtils::MakeMaker 6.17;
 
 
 
 my %WriteMakefileArgs = (
   "ABSTRACT" => "check xt tests before release",
   "AUTHOR" => "David Golden <dagolden\@cpan.org>, Jesse Luehrs <doy\@cpan.org>",
-  "BUILD_REQUIRES" => {
-    "Capture::Tiny" => 0,
-    "Dist::Zilla::App::Tester" => 0,
-    "Dist::Zilla::Tester" => 0,
-    "File::Find" => 0,
-    "Params::Util" => 0,
-    "Sub::Exporter" => 0,
-    "Test::More" => "0.88",
-    "Test::Requires" => 0,
-    "Try::Tiny" => 0
-  },
+  "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
-    "ExtUtils::MakeMaker" => "6.30"
+    "ExtUtils::MakeMaker" => "6.17"
   },
   "DISTNAME" => "Dist-Zilla-Plugin-CheckExtraTests",
   "EXE_FILES" => [],
@@ -37,7 +27,7 @@ my %WriteMakefileArgs = (
     "Dist::Zilla::Role::TestRunner" => 0,
     "File::Temp" => 0,
     "File::pushd" => 0,
-    "Moose" => "0.99",
+    "Moose" => 2,
     "Moose::Autobox" => 0,
     "Path::Iterator::Rule" => 0,
     "Path::Tiny" => 0,
@@ -45,12 +35,39 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.011",
+  "TEST_REQUIRES" => {
+    "Capture::Tiny" => 0,
+    "Dist::Zilla::App::Tester" => 0,
+    "Dist::Zilla::Tester" => 0,
+    "ExtUtils::MakeMaker" => 0,
+    "File::Spec::Functions" => 0,
+    "List::Util" => 0,
+    "Params::Util" => 0,
+    "Sub::Exporter" => 0,
+    "Test::More" => "0.88",
+    "Test::Requires" => 0,
+    "Try::Tiny" => 0,
+    "lib" => 0
+  },
+  "VERSION" => "0.012",
   "test" => {
     "TESTS" => "t/*.t"
   }
 );
 
+
+unless ( eval { ExtUtils::MakeMaker->VERSION(6.63_03) } ) {
+  my $tr = delete $WriteMakefileArgs{TEST_REQUIRES};
+  my $br = $WriteMakefileArgs{BUILD_REQUIRES};
+  for my $mod ( keys %$tr ) {
+    if ( exists $br->{$mod} ) {
+      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
+    }
+    else {
+      $br->{$mod} = $tr->{$mod};
+    }
+  }
+}
 
 unless ( eval { ExtUtils::MakeMaker->VERSION(6.56) } ) {
   my $br = delete $WriteMakefileArgs{BUILD_REQUIRES};

@@ -1,12 +1,13 @@
 use strict;
 use warnings;
+
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.011'; # VERSION
+our $VERSION = '0.012'; # VERSION
 
 # Dependencies
-use Dist::Zilla 2.100950 (); # XXX really the next release after this date
-use Moose 0.99;
+use Dist::Zilla 2.3 ();
+use Moose 2;
 use namespace::autoclean 0.09;
 
 # extends, roles, attributes, etc.
@@ -16,28 +17,28 @@ with 'Dist::Zilla::Role::BeforeRelease';
 # methods
 
 sub before_release {
-  my $self = shift;
+    my $self = shift;
 
-  $self->zilla->ensure_built_in;
+    $self->zilla->ensure_built_in;
 
-  # chdir in
-  require File::pushd;
-  my $wd = File::pushd::pushd($self->zilla->built_in);
+    # chdir in
+    require File::pushd;
+    my $wd = File::pushd::pushd( $self->zilla->built_in );
 
-  # make
-  my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
-  die "no BuildRunner plugins specified" unless @builders;
-  $builders[0]->build;
+    # make
+    my @builders = @{ $self->zilla->plugins_with( -BuildRunner ) };
+    die "no BuildRunner plugins specified" unless @builders;
+    $_->build for @builders;
 
-  require App::Prove;
-  App::Prove->VERSION('3.00');
+    require App::Prove;
+    App::Prove->VERSION('3.00');
 
-  # prove xt
-  local $ENV{RELEASE_TESTING} = 1;
-  my $app = App::Prove->new;
-  $app->process_args(qw/-r -b xt/);
-  $app->run or $self->log_fatal("Fatal errors in xt tests");
-  return;
+    # prove xt
+    local $ENV{RELEASE_TESTING} = 1;
+    my $app = App::Prove->new;
+    $app->process_args(qw/-r -b xt/);
+    $app->run or $self->log_fatal("Fatal errors in xt tests");
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -48,13 +49,15 @@ __END__
 
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.011
+version 0.012
 
 =head1 SYNOPSIS
 
@@ -96,7 +99,7 @@ public review and contribution under the terms of the license.
 
 L<https://github.com/dagolden/dist-zilla-plugin-checkextratests>
 
-  git clone git://github.com/dagolden/dist-zilla-plugin-checkextratests.git
+  git clone https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
 
 =head1 AUTHORS
 
@@ -109,6 +112,28 @@ David Golden <dagolden@cpan.org>
 =item *
 
 Jesse Luehrs <doy@cpan.org>
+
+=back
+
+=head1 CONTRIBUTORS
+
+=over 4
+
+=item *
+
+Christopher J. Madsen <cjm@cpan.org>
+
+=item *
+
+Karen Etheridge <ether@cpan.org>
+
+=item *
+
+Olivier Mengue <dolmen@cpan.org>
+
+=item *
+
+Ricardo Signes <rjbs@cpan.org>
 
 =back
 

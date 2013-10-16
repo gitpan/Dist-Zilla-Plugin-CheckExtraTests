@@ -1,12 +1,13 @@
 use strict;
 use warnings;
+
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
-our $VERSION = '0.011'; # VERSION
+our $VERSION = '0.012'; # VERSION
 
 # Dependencies
-use Dist::Zilla 2.100950 (); # XXX really the next release after this date
-use Moose 0.99;
+use Dist::Zilla 2.3 ();
+use Moose 2;
 use namespace::autoclean 0.09;
 
 # extends, roles, attributes, etc.
@@ -16,29 +17,30 @@ with 'Dist::Zilla::Role::TestRunner';
 # methods
 
 sub test {
-  my $self = shift;
+    my $self = shift;
 
-  my @dirs;
-  push @dirs, 'xt/release' if $ENV{RELEASE_TESTING};
-  push @dirs, 'xt/author'  if $ENV{AUTHOR_TESTING};
-  push @dirs, 'xt/smoke'   if $ENV{AUTOMATED_TESTING};
-  @dirs = grep { -d } @dirs;
-  return unless @dirs;
+    my @dirs;
+    push @dirs, 'xt/release' if $ENV{RELEASE_TESTING};
+    push @dirs, 'xt/author'  if $ENV{AUTHOR_TESTING};
+    push @dirs, 'xt/smoke'   if $ENV{AUTOMATED_TESTING};
+    @dirs = grep { -d } @dirs;
+    return unless @dirs;
 
-  # If the dist hasn't been built yet, then build it:
-  unless (-d 'blib') {
-    my @builders = @{ $self->zilla->plugins_with(-BuildRunner) };
-    die "no BuildRunner plugins specified" unless @builders;
-    $builders[0]->build;
-  }
+    # If the dist hasn't been built yet, then build it:
+    unless ( -d 'blib' ) {
+        my @builders = @{ $self->zilla->plugins_with( -BuildRunner ) };
+        die "no BuildRunner plugins specified" unless @builders;
+        $_->build for @builders;
+        die "no blib; failed to build properly?" unless -d 'blib';
+    }
 
-  require App::Prove;
-  App::Prove->VERSION('3.00');
+    require App::Prove;
+    App::Prove->VERSION('3.00');
 
-  my $app = App::Prove->new;
-  $app->process_args(qw/-r -b/, @dirs);
-  $app->run or $self->log_fatal("Fatal errors in xt tests");
-  return;
+    my $app = App::Prove->new;
+    $app->process_args( qw/-r -b/, @dirs );
+    $app->run or $self->log_fatal("Fatal errors in xt tests");
+    return;
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -49,13 +51,15 @@ __END__
 
 =pod
 
+=encoding utf-8
+
 =head1 NAME
 
 Dist::Zilla::Plugin::RunExtraTests - support running xt tests via dzil test
 
 =head1 VERSION
 
-version 0.011
+version 0.012
 
 =head1 SYNOPSIS
 
