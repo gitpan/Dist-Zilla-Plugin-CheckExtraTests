@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.012'; # VERSION
+our $VERSION = '0.013'; # VERSION
 
 # Dependencies
 use Dist::Zilla 2.3 ();
@@ -57,7 +57,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.012
+version 0.013
 
 =head1 SYNOPSIS
 
@@ -89,7 +89,7 @@ L<Dist::Zilla>
 =head2 Bugs / Feature Requests
 
 Please report any bugs or feature requests through the issue tracker
-at L<https://github.com/dagolden/dist-zilla-plugin-checkextratests/issues>.
+at L<https://github.com/dagolden/Dist-Zilla-Plugin-CheckExtraTests/issues>.
 You will be notified automatically of any progress on your issue.
 
 =head2 Source Code
@@ -97,9 +97,9 @@ You will be notified automatically of any progress on your issue.
 This is open source software.  The code repository is available for
 public review and contribution under the terms of the license.
 
-L<https://github.com/dagolden/dist-zilla-plugin-checkextratests>
+L<https://github.com/dagolden/Dist-Zilla-Plugin-CheckExtraTests>
 
-  git clone https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
+  git clone https://github.com/dagolden/Dist-Zilla-Plugin-CheckExtraTests.git
 
 =head1 AUTHORS
 

@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-our $VERSION = '0.012'; # VERSION
+our $VERSION = '0.013'; # VERSION
 use Dist::Zilla::App -command;
 
 use Moose::Autobox;
@@ -92,7 +92,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.012
+version 0.013
 
 =head1 SYNOPSIS
 

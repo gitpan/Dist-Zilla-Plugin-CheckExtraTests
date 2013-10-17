@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
-our $VERSION = '0.012'; # VERSION
+our $VERSION = '0.013'; # VERSION
 
 # Dependencies
 use Dist::Zilla 2.3 ();
@@ -20,9 +20,9 @@ sub test {
     my $self = shift;
 
     my @dirs;
-    push @dirs, 'xt/release' if $ENV{RELEASE_TESTING};
     push @dirs, 'xt/author'  if $ENV{AUTHOR_TESTING};
     push @dirs, 'xt/smoke'   if $ENV{AUTOMATED_TESTING};
+    push @dirs, 'xt/release' if $ENV{RELEASE_TESTING};
     @dirs = grep { -d } @dirs;
     return unless @dirs;
 
@@ -59,7 +59,7 @@ Dist::Zilla::Plugin::RunExtraTests - support running xt tests via dzil test
 
 =head1 VERSION
 
-version 0.012
+version 0.013
 
 =head1 SYNOPSIS
 

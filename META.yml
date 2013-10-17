@@ -36,13 +36,13 @@ no_index:
 provides:
   Dist::Zilla::App::Command::xtest:
     file: lib/Dist/Zilla/App/Command/xtest.pm
-    version: 0.012
+    version: 0.013
   Dist::Zilla::Plugin::CheckExtraTests:
     file: lib/Dist/Zilla/Plugin/CheckExtraTests.pm
-    version: 0.012
+    version: 0.013
   Dist::Zilla::Plugin::RunExtraTests:
     file: lib/Dist/Zilla/Plugin/RunExtraTests.pm
-    version: 0.012
+    version: 0.013
 requires:
   App::Prove: 3.00
   Dist::Zilla: 4.3
@@ -60,10 +60,10 @@ requires:
   strict: 0
   warnings: 0
 resources:
-  bugtracker: https://github.com/dagolden/dist-zilla-plugin-checkextratests/issues
-  homepage: https://github.com/dagolden/dist-zilla-plugin-checkextratests
-  repository: https://github.com/dagolden/dist-zilla-plugin-checkextratests.git
-version: 0.012
+  bugtracker: https://github.com/dagolden/Dist-Zilla-Plugin-CheckExtraTests/issues
+  homepage: https://github.com/dagolden/Dist-Zilla-Plugin-CheckExtraTests
+  repository: https://github.com/dagolden/Dist-Zilla-Plugin-CheckExtraTests.git
+version: 0.013
 x_authority: cpan:DAGOLDEN
 x_contributors:
   - 'Christopher J. Madsen <cjm@cpan.org>'
