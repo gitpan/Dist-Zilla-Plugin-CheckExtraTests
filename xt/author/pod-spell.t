@@ -32,9 +32,9 @@ rjbs
 lib
 Dist
 Zilla
+Plugin
+CheckExtraTests
 App
 Command
 xtest
-Plugin
-CheckExtraTests
 RunExtraTests

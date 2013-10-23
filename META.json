@@ -5,7 +5,7 @@
       "Jesse Luehrs <doy@cpan.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300039, CPAN::Meta::Converter version 2.132830",
+   "generated_by" : "Dist::Zilla version 5.001, CPAN::Meta::Converter version 2.132830",
    "license" : [
       "apache_2_0"
    ],
@@ -47,16 +47,15 @@
       "runtime" : {
          "requires" : {
             "App::Prove" : "3.00",
+            "Archive::Tar" : "0",
             "Dist::Zilla" : "4.3",
             "Dist::Zilla::App" : "0",
             "Dist::Zilla::Role::BeforeRelease" : "0",
             "Dist::Zilla::Role::TestRunner" : "0",
-            "File::Temp" : "0",
             "File::pushd" : "0",
             "Moose" : "2",
             "Moose::Autobox" : "0",
             "Path::Iterator::Rule" : "0",
-            "Path::Tiny" : "0",
             "namespace::autoclean" : "0.09",
             "perl" : "5.006",
             "strict" : "0",
@@ -87,18 +86,18 @@
    "provides" : {
       "Dist::Zilla::App::Command::xtest" : {
          "file" : "lib/Dist/Zilla/App/Command/xtest.pm",
-         "version" : "0.013"
+         "version" : "0.014"
       },
       "Dist::Zilla::Plugin::CheckExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/CheckExtraTests.pm",
-         "version" : "0.013"
+         "version" : "0.014"
       },
       "Dist::Zilla::Plugin::RunExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/RunExtraTests.pm",
-         "version" : "0.013"
+         "version" : "0.014"
       }
    },
-   "release_status" : "stable",
+   "release_status" : "testing",
    "resources" : {
       "bugtracker" : {
          "web" : "https://github.com/dagolden/Dist-Zilla-Plugin-CheckExtraTests/issues"
@@ -110,7 +109,7 @@
          "web" : "https://github.com/dagolden/Dist-Zilla-Plugin-CheckExtraTests"
       }
    },
-   "version" : "0.013",
+   "version" : "0.014",
    "x_authority" : "cpan:DAGOLDEN",
    "x_contributors" : [
       "Christopher J. Madsen <cjm@cpan.org>",

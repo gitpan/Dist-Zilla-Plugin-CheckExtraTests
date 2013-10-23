@@ -1,5 +1,15 @@
 Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
+0.014     2013-10-23 19:52:43 America/New_York
+
+    [Fixed]
+
+    - [CheckExtraTest] tests in a .build directory instead of the build
+      directory
+
+    - the 'xtest' command now uses Dist::Zilla methods to build a temporary
+      directory, which also sets the .build/latest symlink correctly
+
 0.013     2013-10-17 17:26:26 America/New_York
 
     [Changed]

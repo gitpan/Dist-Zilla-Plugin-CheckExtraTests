@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-our $VERSION = '0.013'; # VERSION
+our $VERSION = '0.014'; # TRIAL VERSION
 use Dist::Zilla::App -command;
 
 use Moose::Autobox;
@@ -21,49 +21,42 @@ sub execute {
 
     require App::Prove;
     require File::pushd;
-    require File::Temp;
-    require Path::Tiny;
-
-    my $build_root = Path::Tiny::path('.build');
-    $build_root->mkpath unless -d $build_root;
-
-    my $target = Path::Tiny::path( File::Temp::tempdir( DIR => $build_root ) );
-    $self->log("building test distribution under $target");
 
     local $ENV{AUTHOR_TESTING}  = 1;
     local $ENV{RELEASE_TESTING} = 1;
 
-    $self->zilla->ensure_built_in($target);
-
-    my $wd = File::pushd::pushd($target);
-
-    my @builders = @{ $self->zilla->plugins_with( -BuildRunner ) };
-    die "no BuildRunner plugins specified" unless @builders;
-    $_->build for @builders;
+    my ( $target, $latest ) = $self->zilla->ensure_built_in_tmpdir;
 
     my $error;
+    {
+        my $wd = File::pushd::pushd($target);
 
-    my $app = App::Prove->new;
-    if ( ref $arg eq 'ARRAY' && @$arg ) {
-        require Path::Iterator::Rule;
-        my $pcr = Path::Iterator::Rule->new->file->and(
-            sub {
-                my $path = $_;
-                return grep { $path =~ /$_/ } @$arg;
+        my @builders = @{ $self->zilla->plugins_with( -BuildRunner ) };
+        die "no BuildRunner plugins specified" unless @builders;
+        $_->build for @builders;
+
+        my $app = App::Prove->new;
+        if ( ref $arg eq 'ARRAY' && @$arg ) {
+            require Path::Iterator::Rule;
+            my $pcr = Path::Iterator::Rule->new->file->and(
+                sub {
+                    my $path = $_;
+                    return grep { $path =~ /$_/ } @$arg;
+                }
+            );
+            my @t = map { "$_" } $pcr->all('xt');
+            if (@t) {
+                $app->process_args( qw/-r -b/, @t ) if @t;
+                $error = "Failed xt tests" unless $app->run;
             }
-        );
-        my @t = map { "$_" } $pcr->all('xt');
-        if (@t) {
-            $app->process_args( qw/-r -b/, @t ) if @t;
-            $error = "Failed xt tests" unless $app->run;
+            else {
+                $self->log("no xt files found matching: @$arg");
+            }
         }
         else {
-            $self->log("no xt files found matching: @$arg");
+            $app->process_args(qw/-r -b xt/);
+            $error = "Failed xt tests" unless $app->run;
         }
-    }
-    else {
-        $app->process_args(qw/-r -b xt/);
-        $error = "Failed xt tests" unless $app->run;
     }
 
     if ($error) {
@@ -73,7 +66,8 @@ sub execute {
     }
     else {
         $self->log("all's well; removing $target");
-        $target->remove;
+        $target->rmtree;
+        $latest->remove if $latest;
     }
 
 }
@@ -84,7 +78,7 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
 =head1 NAME
 
@@ -92,7 +86,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.013
+version 0.014
 
 =head1 SYNOPSIS
 
@@ -108,6 +102,8 @@ on, so it's like doing this:
   dzil build
   rsync -avp My-Project-Version/ .build/
   cd .build;
+  perl Makefile.PL
+  make
   prove -l -r xt
 
 Except for the fact it's built directly in a subdir of .build (like

@@ -13,6 +13,7 @@ use List::Util qw/max/;
 
 my @modules = qw(
   App::Prove
+  Archive::Tar
   CPAN::Meta
   CPAN::Meta::Requirements
   Capture::Tiny
@@ -24,14 +25,12 @@ my @modules = qw(
   Dist::Zilla::Tester
   ExtUtils::MakeMaker
   File::Spec::Functions
-  File::Temp
   File::pushd
   List::Util
   Moose
   Moose::Autobox
   Params::Util
   Path::Iterator::Rule
-  Path::Tiny
   Sub::Exporter
   Test::More
   Test::Requires

@@ -6,7 +6,6 @@ META.json
 META.yml
 Makefile.PL
 README
-Todo
 corpus/DZ/Changes
 corpus/DZ/dist.ini
 corpus/DZ/foobar
@@ -34,7 +33,6 @@ t/lib/Test/DZil.pm
 t/runxt.t
 t/withblib.t
 tidyall.ini
-weaver.ini
 xt/author/00-compile.t
 xt/author/critic.t
 xt/author/pod-spell.t

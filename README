@@ -2,7 +2,7 @@ NAME
     Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 VERSION
-    version 0.013
+    version 0.014
 
 SYNOPSIS
     In your dist.ini:
@@ -10,8 +10,13 @@ SYNOPSIS
       [CheckExtraTests]
 
 DESCRIPTION
-    Runs all xt tests before release. Dies if any fail. Sets
-    RELEASE_TESTING, but not AUTHOR_TESTING.
+    Runs all xt tests before release. Dies if any fail. Sets RELEASE_TESTING
+    and AUTHOR_TESTING.
+
+    If you use Dist::Zilla::Plugin::TestRelease, you should consider using
+    Dist::Zilla::Plugin::RunExtraTests instead, which enables xt tests to
+    run as part of "[TestRelease]" and is thus a bit more efficient as the
+    distribution is only built once for testing.
 
 SEE ALSO
     *   Dist::Zilla
