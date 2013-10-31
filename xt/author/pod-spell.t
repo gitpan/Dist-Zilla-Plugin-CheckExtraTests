@@ -33,8 +33,8 @@ lib
 Dist
 Zilla
 Plugin
+RunExtraTests
 CheckExtraTests
 App
 Command
 xtest
-RunExtraTests
