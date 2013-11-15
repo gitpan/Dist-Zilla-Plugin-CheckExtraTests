@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.016'; # VERSION
 
 # Dependencies
 use Dist::Zilla 2.3 ();
@@ -59,7 +59,7 @@ Dist::Zilla::Plugin::RunExtraTests - support running xt tests via dzil test
 
 =head1 VERSION
 
-version 0.015
+version 0.016
 
 =head1 SYNOPSIS
 

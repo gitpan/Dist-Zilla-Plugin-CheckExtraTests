@@ -3,10 +3,18 @@ use warnings;
 
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-our $VERSION = '0.015'; # VERSION
+our $VERSION = '0.016'; # VERSION
 use Dist::Zilla::App -command;
 
 use Moose::Autobox;
+
+
+sub opt_spec {
+  [ 'author!' => 'enables the AUTHOR_TESTING env variable (default behavior)', { default => 1 } ],
+  [ 'release!'   => 'enables the RELEASE_TESTING env variable (default behavior)', { default => 1 } ],
+  [ 'automated' => 'enables the AUTOMATED_TESTING env variable', { default => 0 } ],
+  [ 'all' => 'enables the RELEASE_TESTING, AUTOMATED_TESTING and AUTHOR_TESTING env variables', { default => 0 } ]
+}
 
 
 sub abstract { 'run xt tests for your dist' }
@@ -22,8 +30,9 @@ sub execute {
     require App::Prove;
     require File::pushd;
 
-    local $ENV{AUTHOR_TESTING}  = 1;
-    local $ENV{RELEASE_TESTING} = 1;
+    local $ENV{AUTHOR_TESTING} = 1 if $opt->author or $opt->all;
+    local $ENV{RELEASE_TESTING} = 1 if $opt->release or $opt->all;
+    local $ENV{AUTOMATED_TESTING} = 1 if $opt->automated or $opt->all;
 
     my ( $target, $latest ) = $self->zilla->ensure_built_in_tmpdir;
 
@@ -86,13 +95,13 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.015
+version 0.016
 
 =head1 SYNOPSIS
 
 Run xt tests for your distribution:
 
-  dzil xtest
+  dzil xtest [ --no-author] [ --no-release ] [ --no-automated ] [ --all ]
 
 This runs with AUTHOR_TESTING and RELEASE_TESTING environment variables turned
 on, so it's like doing this:
@@ -130,6 +139,24 @@ do any sort of partial match you want:
 
 There is no need to add anything to F<dist.ini> -- installation of this module
 is sufficient to make the command available.
+
+=head1 OPTIONS
+
+=head2 --no-author
+
+This will run the test suite without setting AUTHOR_TESTING
+
+=head2 --no-release
+
+This will run the test suite without setting RELEASE_TESTING
+
+=head2 --automated
+
+This will run the test suite with AUTOMATED_TESTING=1
+
+=head2 --all
+
+Equivalent to --release --automated --author
 
 =head1 AUTHORS
 
