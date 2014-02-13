@@ -3,10 +3,10 @@ use warnings;
 
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
-our $VERSION = '0.016'; # VERSION
+our $VERSION = '0.017'; # VERSION
 
 # Dependencies
-use Dist::Zilla 2.3 ();
+use Dist::Zilla 4.3 ();
 use Moose 2;
 use namespace::autoclean 0.09;
 
@@ -59,7 +59,7 @@ Dist::Zilla::Plugin::RunExtraTests - support running xt tests via dzil test
 
 =head1 VERSION
 
-version 0.016
+version 0.017
 
 =head1 SYNOPSIS
 
@@ -106,7 +106,7 @@ Jesse Luehrs <doy@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by David Golden.
+This software is Copyright (c) 2014 by David Golden.
 
 This is free software, licensed under:
 

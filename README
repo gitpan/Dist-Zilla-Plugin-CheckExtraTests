@@ -2,7 +2,7 @@ NAME
     Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 VERSION
-    version 0.016
+    version 0.017
 
 SYNOPSIS
     In your dist.ini:
@@ -50,7 +50,7 @@ CONTRIBUTORS
     *   Ricardo Signes <rjbs@cpan.org>
 
 COPYRIGHT AND LICENSE
-    This software is Copyright (c) 2013 by David Golden.
+    This software is Copyright (c) 2014 by David Golden.
 
     This is free software, licensed under:
 

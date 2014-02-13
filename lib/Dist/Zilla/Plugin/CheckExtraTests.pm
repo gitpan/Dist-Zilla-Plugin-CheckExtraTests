@@ -3,10 +3,10 @@ use warnings;
 
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.016'; # VERSION
+our $VERSION = '0.017'; # VERSION
 
 # Dependencies
-use Dist::Zilla 2.3 ();
+use Dist::Zilla 4.3 ();
 use Moose 2;
 use namespace::autoclean 0.09;
 
@@ -20,10 +20,12 @@ sub before_release {
     my ( $self, $tgz ) = @_;
     $tgz = $tgz->absolute;
 
-    my $build_root = $self->zilla->root->subdir('.build');
+    require Path::Tiny;
+
+    my $build_root = Path::Tiny::path( $self->zilla->root )->child('.build');
     $build_root->mkpath unless -d $build_root;
 
-    my $tmpdir = Path::Class::dir( File::Temp::tempdir( DIR => $build_root ) );
+    my $tmpdir = Path::Tiny->tempdir( DIR => $build_root );
 
     $self->log("Extracting $tgz to $tmpdir");
 
@@ -38,7 +40,7 @@ sub before_release {
       unless @files;
 
     # Run tests on the extracted tarball:
-    my $target = $tmpdir->subdir( $self->zilla->dist_basename );
+    my $target = $tmpdir->child( $self->zilla->dist_basename );
 
     local $ENV{RELEASE_TESTING} = 1;
     local $ENV{AUTHOR_TESTING}  = 1;
@@ -62,7 +64,7 @@ sub before_release {
     }
 
     $self->log("all's well; removing $tmpdir");
-    $tmpdir->rmtree;
+    $tmpdir->remove_tree;
 
     return;
 }
@@ -83,7 +85,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.016
+version 0.017
 
 =head1 SYNOPSIS
 
@@ -170,7 +172,7 @@ Ricardo Signes <rjbs@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2013 by David Golden.
+This software is Copyright (c) 2014 by David Golden.
 
 This is free software, licensed under:
 
