@@ -90,15 +90,15 @@
    "provides" : {
       "Dist::Zilla::App::Command::xtest" : {
          "file" : "lib/Dist/Zilla/App/Command/xtest.pm",
-         "version" : "0.017"
+         "version" : "0.018"
       },
       "Dist::Zilla::Plugin::CheckExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/CheckExtraTests.pm",
-         "version" : "0.017"
+         "version" : "0.018"
       },
       "Dist::Zilla::Plugin::RunExtraTests" : {
          "file" : "lib/Dist/Zilla/Plugin/RunExtraTests.pm",
-         "version" : "0.017"
+         "version" : "0.018"
       }
    },
    "release_status" : "stable",
@@ -113,7 +113,7 @@
          "web" : "https://github.com/dagolden/Dist-Zilla-Plugin-CheckExtraTests"
       }
    },
-   "version" : "0.017",
+   "version" : "0.018",
    "x_authority" : "cpan:DAGOLDEN",
    "x_contributors" : [
       "Christopher J. Madsen <cjm@cpan.org>",

@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.017'; # VERSION
+our $VERSION = '0.018'; # VERSION
 
 # Dependencies
 use Dist::Zilla 4.3 ();
@@ -64,7 +64,7 @@ sub before_release {
     }
 
     $self->log("all's well; removing $tmpdir");
-    $tmpdir->remove_tree;
+    $tmpdir->remove_tree( { safe => 0 } );
 
     return;
 }
@@ -85,7 +85,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.017
+version 0.018
 
 =head1 SYNOPSIS
 

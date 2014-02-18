@@ -34,7 +34,7 @@ Dist
 Zilla
 Plugin
 CheckExtraTests
+RunExtraTests
 App
 Command
 xtest
-RunExtraTests
