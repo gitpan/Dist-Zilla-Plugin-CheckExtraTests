@@ -2,7 +2,7 @@ NAME
     Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 VERSION
-    version 0.019
+    version 0.020
 
 SYNOPSIS
     In your dist.ini:
@@ -17,6 +17,11 @@ DESCRIPTION
     Dist::Zilla::Plugin::RunExtraTests instead, which enables xt tests to
     run as part of "[TestRelease]" and is thus a bit more efficient as the
     distribution is only built once for testing.
+
+ATTRIBUTES
+  default_jobs
+    This attribute is the default value that should be used as the "jobs"
+    argument for prerelease tests.
 
 SEE ALSO
     *   Dist::Zilla

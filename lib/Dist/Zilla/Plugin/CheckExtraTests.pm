@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.019'; # VERSION
+our $VERSION = '0.020'; # VERSION
 
 # Dependencies
 use Dist::Zilla 4.3 ();
@@ -13,6 +13,19 @@ use namespace::autoclean 0.09;
 # extends, roles, attributes, etc.
 
 with 'Dist::Zilla::Role::BeforeRelease';
+
+# =attr default_jobs
+#
+# This attribute is the default value that should be used as the C<jobs> argument
+# for prerelease tests.
+#
+# =cut
+
+has default_jobs => (
+    is      => 'ro',
+    isa     => 'Int', # non-negative
+    default => 1,
+);
 
 # methods
 
@@ -55,7 +68,7 @@ sub before_release {
         die "no BuildRunner plugins specified" unless @builders;
         $_->build for @builders;
 
-        my $jobs = $self->can('default_jobs') ? $self->default_jobs : 1;
+        my $jobs = $self->default_jobs;
 
         require App::Prove;
         App::Prove->VERSION('3.00');
@@ -87,7 +100,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.019
+version 0.020
 
 =head1 SYNOPSIS
 
@@ -104,6 +117,13 @@ If you use L<Dist::Zilla::Plugin::TestRelease>, you should consider using
 L<Dist::Zilla::Plugin::RunExtraTests> instead, which enables xt tests to
 run as part of C<[TestRelease]> and is thus a bit more efficient as the
 distribution is only built once for testing.
+
+=head1 ATTRIBUTES
+
+=head2 default_jobs
+
+This attribute is the default value that should be used as the C<jobs> argument
+for prerelease tests.
 
 =for Pod::Coverage::TrustPod before_release
 
