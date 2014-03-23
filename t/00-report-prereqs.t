@@ -50,7 +50,7 @@ my $static_prereqs = do { my $x = {
                       },
        'develop' => {
                       'requires' => {
-                                      'Dist::Zilla' => '5.013',
+                                      'Dist::Zilla' => '5.014',
                                       'Dist::Zilla::PluginBundle::DAGOLDEN' => '0.060',
                                       'File::Spec' => '0',
                                       'File::Temp' => '0',
@@ -77,7 +77,7 @@ my $static_prereqs = do { my $x = {
                                       'Path::Iterator::Rule' => '0',
                                       'Path::Tiny' => '0',
                                       'namespace::autoclean' => '0.09',
-                                      'perl' => '5.006',
+                                      'perl' => '5.008',
                                       'strict' => '0',
                                       'warnings' => '0'
                                     }

@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-our $VERSION = '0.018'; # VERSION
+our $VERSION = '0.019'; # VERSION
 use Dist::Zilla::App -command;
 
 use Moose::Autobox;
@@ -54,10 +54,21 @@ use Moose::Autobox;
 # =cut
 
 sub opt_spec {
-  [ 'author!' => 'enables the AUTHOR_TESTING env variable (default behavior)', { default => 1 } ],
-  [ 'release!'   => 'enables the RELEASE_TESTING env variable (default behavior)', { default => 1 } ],
-  [ 'automated' => 'enables the AUTOMATED_TESTING env variable', { default => 0 } ],
-  [ 'all' => 'enables the RELEASE_TESTING, AUTOMATED_TESTING and AUTHOR_TESTING env variables', { default => 0 } ]
+    [
+        'author!' => 'enables the AUTHOR_TESTING env variable (default behavior)',
+        { default => 1 }
+    ],
+      [
+        'release!' => 'enables the RELEASE_TESTING env variable (default behavior)',
+        { default => 1 }
+      ],
+      [ 'automated' => 'enables the AUTOMATED_TESTING env variable', { default => 0 } ],
+      [ 'jobs|j=i'  => 'number of parallel test jobs to run',        { default => 1 } ],
+      [
+        'all' =>
+          'enables the RELEASE_TESTING, AUTOMATED_TESTING and AUTHOR_TESTING env variables',
+        { default => 0 }
+      ];
 }
 
 # =head1 OPTIONS
@@ -93,8 +104,8 @@ sub execute {
     require App::Prove;
     require File::pushd;
 
-    local $ENV{AUTHOR_TESTING} = 1 if $opt->author or $opt->all;
-    local $ENV{RELEASE_TESTING} = 1 if $opt->release or $opt->all;
+    local $ENV{AUTHOR_TESTING}    = 1 if $opt->author    or $opt->all;
+    local $ENV{RELEASE_TESTING}   = 1 if $opt->release   or $opt->all;
     local $ENV{AUTOMATED_TESTING} = 1 if $opt->automated or $opt->all;
 
     my ( $target, $latest ) = $self->zilla->ensure_built_in_tmpdir;
@@ -118,7 +129,7 @@ sub execute {
             );
             my @t = map { "$_" } $pcr->all('xt');
             if (@t) {
-                $app->process_args( qw/-r -b/, @t ) if @t;
+                $app->process_args( '-j', $self->jobs, qw/-r -b/, @t ) if @t;
                 $error = "Failed xt tests" unless $app->run;
             }
             else {
@@ -126,7 +137,7 @@ sub execute {
             }
         }
         else {
-            $app->process_args(qw/-r -b xt/);
+            $app->process_args( '-j', $self->jobs, qw/-r -b xt/ );
             $error = "Failed xt tests" unless $app->run;
         }
     }
@@ -158,7 +169,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.018
+version 0.019
 
 =head1 SYNOPSIS
 
