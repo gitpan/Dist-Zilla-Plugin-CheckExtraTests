@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.020'; # VERSION
+our $VERSION = '0.021'; # VERSION
 
 # Dependencies
 use Dist::Zilla 4.3 ();
@@ -14,12 +14,12 @@ use namespace::autoclean 0.09;
 
 with 'Dist::Zilla::Role::BeforeRelease';
 
-# =attr default_jobs
-#
-# This attribute is the default value that should be used as the C<jobs> argument
-# for prerelease tests.
-#
-# =cut
+#pod =attr default_jobs
+#pod
+#pod This attribute is the default value that should be used as the C<jobs> argument
+#pod for prerelease tests.
+#pod
+#pod =cut
 
 has default_jobs => (
     is      => 'ro',
@@ -33,7 +33,7 @@ sub before_release {
     my ( $self, $tgz ) = @_;
     $tgz = $tgz->absolute;
 
-    require Path::Tiny;
+    { require Path::Tiny; Path::Tiny->VERSION(0.013) }
 
     my $build_root = Path::Tiny::path( $self->zilla->root )->child('.build');
     $build_root->mkpath unless -d $build_root;
@@ -100,7 +100,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.020
+version 0.021
 
 =head1 SYNOPSIS
 

@@ -75,7 +75,7 @@ my $static_prereqs = do { my $x = {
                                       'Moose' => '2',
                                       'Moose::Autobox' => '0',
                                       'Path::Iterator::Rule' => '0',
-                                      'Path::Tiny' => '0',
+                                      'Path::Tiny' => '0.013',
                                       'namespace::autoclean' => '0.09',
                                       'perl' => '5.008',
                                       'strict' => '0',

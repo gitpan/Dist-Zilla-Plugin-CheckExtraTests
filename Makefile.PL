@@ -31,7 +31,7 @@ my %WriteMakefileArgs = (
     "Moose" => 2,
     "Moose::Autobox" => 0,
     "Path::Iterator::Rule" => 0,
-    "Path::Tiny" => 0,
+    "Path::Tiny" => "0.013",
     "namespace::autoclean" => "0.09",
     "strict" => 0,
     "warnings" => 0
@@ -51,7 +51,7 @@ my %WriteMakefileArgs = (
     "lib" => 0,
     "version" => 0
   },
-  "VERSION" => "0.020",
+  "VERSION" => "0.021",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -76,7 +76,7 @@ my %FallbackPrereqs = (
   "Moose::Autobox" => 0,
   "Params::Util" => 0,
   "Path::Iterator::Rule" => 0,
-  "Path::Tiny" => 0,
+  "Path::Tiny" => "0.013",
   "Sub::Exporter" => 0,
   "Test::More" => "0.88",
   "Test::Requires" => 0,
