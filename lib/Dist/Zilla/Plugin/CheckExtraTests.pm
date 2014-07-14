@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.021'; # VERSION
+our $VERSION = '0.022'; # VERSION
 
 # Dependencies
 use Dist::Zilla 4.3 ();
@@ -100,7 +100,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.021
+version 0.022
 
 =head1 SYNOPSIS
 

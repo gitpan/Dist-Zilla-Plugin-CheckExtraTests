@@ -3,7 +3,7 @@ use warnings;
 
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
-our $VERSION = '0.021'; # VERSION
+our $VERSION = '0.022'; # VERSION
 
 # Dependencies
 use Dist::Zilla 4.3 ();
@@ -17,7 +17,7 @@ with 'Dist::Zilla::Role::TestRunner';
 # methods
 
 sub test {
-    my $self = shift;
+    my ($self, $target, $arg) = @_;
 
     my @dirs;
     push @dirs, 'xt/author'  if $ENV{AUTHOR_TESTING};
@@ -34,7 +34,11 @@ sub test {
         die "no blib; failed to build properly?" unless -d 'blib';
     }
 
-    my $jobs = $self->can('default_jobs') ? $self->default_jobs : 1;
+    my $jobs = $arg && exists $arg->{jobs}
+             ? $arg->{jobs}
+             : $self->can('default_jobs')
+             ? $self->default_jobs
+             : 1;
 
     require App::Prove;
     App::Prove->VERSION('3.00');
@@ -61,7 +65,7 @@ Dist::Zilla::Plugin::RunExtraTests - support running xt tests via dzil test
 
 =head1 VERSION
 
-version 0.021
+version 0.022
 
 =head1 SYNOPSIS
 
