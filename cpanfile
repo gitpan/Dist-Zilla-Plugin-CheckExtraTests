@@ -6,7 +6,6 @@ requires "Dist::Zilla::Role::BeforeRelease" => "0";
 requires "Dist::Zilla::Role::TestRunner" => "0";
 requires "File::pushd" => "0";
 requires "Moose" => "2";
-requires "Moose::Autobox" => "0";
 requires "Path::Iterator::Rule" => "0";
 requires "Path::Tiny" => "0.013";
 requires "namespace::autoclean" => "0.09";
@@ -19,29 +18,28 @@ on 'test' => sub {
   requires "Dist::Zilla::App::Tester" => "0";
   requires "Dist::Zilla::Tester" => "0";
   requires "ExtUtils::MakeMaker" => "0";
-  requires "File::Spec::Functions" => "0";
-  requires "List::Util" => "0";
+  requires "File::Spec" => "0";
   requires "Params::Util" => "0";
   requires "Sub::Exporter" => "0";
   requires "Test::More" => "0.88";
   requires "Test::Requires" => "0";
   requires "Try::Tiny" => "0";
   requires "lib" => "0";
-  requires "version" => "0";
+  requires "perl" => "5.006";
 };
 
 on 'test' => sub {
-  recommends "CPAN::Meta" => "0";
-  recommends "CPAN::Meta::Requirements" => "2.120900";
+  recommends "CPAN::Meta" => "2.120900";
 };
 
 on 'configure' => sub {
   requires "ExtUtils::MakeMaker" => "6.17";
+  requires "perl" => "5.006";
 };
 
 on 'develop' => sub {
   requires "Dist::Zilla" => "5";
-  requires "Dist::Zilla::PluginBundle::DAGOLDEN" => "0.060";
+  requires "Dist::Zilla::PluginBundle::DAGOLDEN" => "0.072";
   requires "File::Spec" => "0";
   requires "File::Temp" => "0";
   requires "IO::Handle" => "0";

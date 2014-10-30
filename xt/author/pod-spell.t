@@ -24,6 +24,9 @@ cjm
 Karen
 Etheridge
 ether
+Kent
+Fredric
+kentfredric
 Olivier
 Mengue
 dolmen
@@ -34,8 +37,8 @@ lib
 Dist
 Zilla
 Plugin
-CheckExtraTests
 RunExtraTests
+CheckExtraTests
 App
 Command
 xtest

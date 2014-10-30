@@ -2,7 +2,7 @@ NAME
     Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 VERSION
-    version 0.022
+    version 0.023
 
 SYNOPSIS
     In your dist.ini:
@@ -49,6 +49,8 @@ CONTRIBUTORS
     *   Christopher J. Madsen <cjm@cpan.org>
 
     *   Karen Etheridge <ether@cpan.org>
+
+    *   Kent Fredric <kentfredric@gmail.com>
 
     *   Olivier Mengue <dolmen@cpan.org>
 

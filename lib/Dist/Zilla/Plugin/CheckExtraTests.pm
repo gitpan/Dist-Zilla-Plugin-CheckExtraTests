@@ -3,7 +3,8 @@ use warnings;
 
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
-our $VERSION = '0.022'; # VERSION
+
+our $VERSION = '0.023';
 
 # Dependencies
 use Dist::Zilla 4.3 ();
@@ -100,7 +101,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.022
+version 0.023
 
 =head1 SYNOPSIS
 
@@ -172,6 +173,8 @@ Jesse Luehrs <doy@cpan.org>
 
 =head1 CONTRIBUTORS
 
+=for stopwords Christopher J. Madsen Karen Etheridge Kent Fredric Olivier Mengue Ricardo Signes
+
 =over 4
 
 =item *
@@ -181,6 +184,10 @@ Christopher J. Madsen <cjm@cpan.org>
 =item *
 
 Karen Etheridge <ether@cpan.org>
+
+=item *
+
+Kent Fredric <kentfredric@gmail.com>
 
 =item *
 

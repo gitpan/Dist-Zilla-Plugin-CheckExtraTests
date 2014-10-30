@@ -3,10 +3,10 @@ use warnings;
 
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
-our $VERSION = '0.022'; # VERSION
-use Dist::Zilla::App -command;
 
-use Moose::Autobox;
+our $VERSION = '0.023';
+
+use Dist::Zilla::App -command;
 
 #pod =head1 SYNOPSIS
 #pod
@@ -169,7 +169,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.022
+version 0.023
 
 =head1 SYNOPSIS
 
