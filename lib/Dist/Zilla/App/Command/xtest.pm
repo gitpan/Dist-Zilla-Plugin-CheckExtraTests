@@ -4,7 +4,7 @@ use warnings;
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
 
-our $VERSION = '0.023';
+our $VERSION = '0.024';
 
 use Dist::Zilla::App -command;
 
@@ -169,7 +169,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.023
+version 0.024
 
 =head1 SYNOPSIS
 
