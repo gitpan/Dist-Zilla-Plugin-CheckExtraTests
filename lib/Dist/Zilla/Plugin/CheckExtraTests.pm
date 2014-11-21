@@ -4,7 +4,7 @@ use warnings;
 package Dist::Zilla::Plugin::CheckExtraTests;
 # ABSTRACT: check xt tests before release
 
-our $VERSION = '0.024';
+our $VERSION = '0.025';
 
 # Dependencies
 use Dist::Zilla 4.3 ();
@@ -70,12 +70,13 @@ sub before_release {
         $_->build for @builders;
 
         my $jobs = $self->default_jobs;
+        my @v = $self->zilla->logger->get_debug ? ('-v') : ();
 
         require App::Prove;
         App::Prove->VERSION('3.00');
 
         my $app = App::Prove->new;
-        $app->process_args( '-j', $jobs, qw/-r -b xt/ );
+        $app->process_args( '-j', $jobs, @v, qw/-r -b xt/ );
         $app->run or $self->log_fatal("Fatal errors in xt tests");
     }
 
@@ -101,7 +102,7 @@ Dist::Zilla::Plugin::CheckExtraTests - check xt tests before release
 
 =head1 VERSION
 
-version 0.024
+version 0.025
 
 =head1 SYNOPSIS
 

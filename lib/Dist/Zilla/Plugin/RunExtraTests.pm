@@ -4,7 +4,7 @@ use warnings;
 package Dist::Zilla::Plugin::RunExtraTests;
 # ABSTRACT: support running xt tests via dzil test
 
-our $VERSION = '0.024';
+our $VERSION = '0.025';
 
 # Dependencies
 use Dist::Zilla 4.3 ();
@@ -41,12 +41,13 @@ sub test {
              : $self->can('default_jobs')
              ? $self->default_jobs
              : 1;
+    my @v = $self->zilla->logger->get_debug ? ('-v') : ();
 
     require App::Prove;
     App::Prove->VERSION('3.00');
 
     my $app = App::Prove->new;
-    $app->process_args( '-j', $jobs, qw/-r -b/, @dirs );
+    $app->process_args( '-j', $jobs, @v, qw/-r -b/, @dirs );
     $app->run or $self->log_fatal("Fatal errors in xt tests");
     return;
 }
@@ -67,7 +68,7 @@ Dist::Zilla::Plugin::RunExtraTests - support running xt tests via dzil test
 
 =head1 VERSION
 
-version 0.024
+version 0.025
 
 =head1 SYNOPSIS
 

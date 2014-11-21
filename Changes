@@ -1,5 +1,11 @@
 Revision history for Dist-Zilla-Plugin-CheckExtraTests
 
+0.025     2014-11-21 11:29:50-05:00 America/New_York
+
+    [Changed]
+
+    - Respects dzil verbose flag
+
 0.024     2014-11-04 05:30:13-05:00 America/New_York
 
     [Added]

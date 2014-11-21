@@ -4,7 +4,7 @@ use warnings;
 package Dist::Zilla::App::Command::xtest;
 # ABSTRACT: run xt tests for your dist
 
-our $VERSION = '0.024';
+our $VERSION = '0.025';
 
 use Dist::Zilla::App -command;
 
@@ -118,6 +118,8 @@ sub execute {
         die "no BuildRunner plugins specified" unless @builders;
         $_->build for @builders;
 
+        my @v = $self->zilla->logger->get_debug ? ('-v') : ();
+
         my $app = App::Prove->new;
         if ( ref $arg eq 'ARRAY' && @$arg ) {
             require Path::Iterator::Rule;
@@ -129,7 +131,7 @@ sub execute {
             );
             my @t = map { "$_" } $pcr->all('xt');
             if (@t) {
-                $app->process_args( '-j', $opt->jobs, qw/-r -b/, @t ) if @t;
+                $app->process_args( '-j', $opt->jobs, @v, qw/-r -b/, @t );
                 $error = "Failed xt tests" unless $app->run;
             }
             else {
@@ -137,7 +139,7 @@ sub execute {
             }
         }
         else {
-            $app->process_args( '-j', $opt->jobs, qw/-r -b xt/ );
+            $app->process_args( '-j', $opt->jobs, @v, qw/-r -b xt/ );
             $error = "Failed xt tests" unless $app->run;
         }
     }
@@ -169,7 +171,7 @@ Dist::Zilla::App::Command::xtest - run xt tests for your dist
 
 =head1 VERSION
 
-version 0.024
+version 0.025
 
 =head1 SYNOPSIS
 
